@@ -1,5 +1,6 @@
 import { getUser } from "@/actions/auth";
 import Image from "next/image";
+import Input from "@/components/Input";
 
 export default async function Home() {
   const user = await getUser();
@@ -21,9 +22,11 @@ export default async function Home() {
           </a>
 
           {/* Amount box/submit button  */}
-          <a className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-white text-black gap-8  text-sm sm:text-base h-30 p-4 w-[320px] ">
-            <div className="flex gap-4 items-center flex-row">
-              <h1 className="font-mono  "> Deposit</h1>
+          {/* it eithe add to balance or withdraw based on the switch */}
+
+          <a className=" relative rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-white text-black gap-8  text-sm sm:text-base h-30 p-4 w-[320px] ">
+            <div className=" absolute top-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex gap-4 items-center flex-row">
+              <h1 className="font-serif  "> Deposit</h1>
 
               <label className="relative inline-block w-10 h-5">
                 <input type="checkbox" className="opacity-0 w-0 h-0 peer" />
@@ -31,12 +34,41 @@ export default async function Home() {
                 <span className="absolute left-0.5 bottom-0.5 h-4 w-4 bg-white transition-transform duration-300 transform peer-checked:translate-x-5 rounded-full"></span>
               </label>
 
-              <h1 className="font-mono  "> withdraw</h1>
+              <h1 className="font-serif "> withdraw</h1>
             </div>
-            
+
+            <div className=" flex gap-2 items-center flex-col mb-4  justify-center mt-16">
+              <label
+                htmlFor="amount"
+                className="block text-gray text-sm font-medium mb-1"
+              >
+                Amount
+              </label>
+              <Input name="amount"  placeHolder ="Amount" type="amount" required />
+             {/* <Input type="hidden" name="username" value={user} />  */}
+
+              <button
+                type="submit"
+                className="px-1 py-1 bg-yello-300  bg-gray-500 text-black rounded-md hover:bg-gray-100 transition-colors"
+              >
+                Submit
+              </button>
+            </div>
+    
+    
           </a>
         </div>
       </main>
+
+
+
+
+
+
+
+
+
+
 
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a

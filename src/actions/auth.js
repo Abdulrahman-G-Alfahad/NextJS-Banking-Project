@@ -74,16 +74,6 @@ export async function getUser() {
   return users;
 }
 
-export async function getUser() {
-  const response = await fetch(`${baseUrl}/mini-project/api/auth/me`, {
-    method: "GET",
-    headers: await getHeaders(),
-  });
-  const user = response.json();
-  //console.log(users);
-  return user;
-}
-
 export async function transfer(formData) {
   console.log(formData);
 }
