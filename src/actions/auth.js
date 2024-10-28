@@ -10,7 +10,7 @@ import { deleteToken, setToken } from "@/lib/token";
 
 export async function login(formData) {
   const userData = Object.fromEntries(formData);
-  console.log(userData);
+  //console.log(userData);
 
   const response = await fetch(`${baseUrl}/mini-project/api/auth/login`, {
     method: "POST",
@@ -26,13 +26,9 @@ export async function login(formData) {
 }
 
 export async function register(formData) {
-  const data = new FormData();
-  data.append("username", formData.username);
-  data.append("password", formData.password);
-  data.append("image", formData.image);
   const response = await fetch(`${baseUrl}/mini-project/api/auth/register`, {
     method: "POST",
-    body: data,
+    body: formData,
   });
 
   const { token } = await response.json();
@@ -65,6 +61,6 @@ export async function getAllUsers() {
     headers: await getHeaders(),
   });
   const users = response.json();
-  console.log(users);
+  //console.log(users);
   return users;
 }

@@ -17,10 +17,12 @@ async function Navbar() {
           </div>
           <div className="block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <NavLink href="/">Home</NavLink>
-              <NavLink href="/transactions">Transactions</NavLink>
-              <NavLink href="/users">Users</NavLink>
-              <NavLink href="/profile">Profile</NavLink>
+              <div className="justify-center">
+                <NavLink href="/">Home</NavLink>
+                <NavLink href="/transactions">Transactions</NavLink>
+                <NavLink href="/users">Users</NavLink>
+                <NavLink href="/profile">Profile</NavLink>
+              </div>
               <AuthButtons />
             </div>
           </div>
