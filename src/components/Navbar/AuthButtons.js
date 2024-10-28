@@ -3,7 +3,6 @@ import NavLink from "./NavLink.js";
 import { logout } from "@/actions/auth";
 
 async function AuthButtons() {
-  // Actually check if there's a user!
   const user = await getUser();
 
   if (user)
