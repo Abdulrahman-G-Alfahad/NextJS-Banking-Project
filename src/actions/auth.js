@@ -70,8 +70,16 @@ export async function getUser() {
     method: "GET",
     headers: await getHeaders(),
   });
-  const users = response.json();
-  return users;
+
+  let user;
+
+  try {
+    user = await response.json();
+  } catch (error) {
+    console.error("Not Logged in");
+  }
+
+  return user;
 }
 
 export async function transfer(formData) {
