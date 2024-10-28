@@ -44,8 +44,13 @@ export default async function Home() {
               >
                 Amount
               </label>
-              <Input name="amount"  placeHolder ="Amount" type="amount" required />
-             {/* <Input type="hidden" name="username" value={user} />  */}
+              <Input
+                name="amount"
+                placeholder="Amount"
+                type="amount"
+                required
+              />
+              {/* <Input type="hidden" name="username" value={user} />  */}
 
               <button
                 type="submit"
@@ -54,21 +59,9 @@ export default async function Home() {
                 Submit
               </button>
             </div>
-    
-    
           </a>
         </div>
       </main>
-
-
-
-
-
-
-
-
-
-
 
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
