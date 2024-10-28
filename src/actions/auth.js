@@ -26,13 +26,9 @@ export async function login(formData) {
 }
 
 export async function register(formData) {
-  const data = new FormData();
-  data.append("username", formData.username);
-  data.append("password", formData.password);
-  data.append("image", formData.image);
   const response = await fetch(`${baseUrl}/mini-project/api/auth/register`, {
     method: "POST",
-    body: data,
+    body: formData,
   });
 
   const { token } = await response.json();
@@ -67,4 +63,25 @@ export async function getAllUsers() {
   const users = response.json();
   console.log(users);
   return users;
+}
+
+export async function getUser() {
+  const response = await fetch(`${baseUrl}/mini-project/api/auth/me`, {
+    method: "GET",
+    headers: await getHeaders(),
+  });
+  const user = response.json();
+  console.log(user);
+  return user;
+}
+
+export async function ImageUpload(image) {
+  console.log(`------------------------------${image}`);
+  const response = await fetch(`${baseUrl}/mini-project/api/auth/profile`, {
+    method: "PUT",
+    headers: await getHeaders(),
+    body: JSON.stringify(image),
+  });
+  const ImageUpload = response.json();
+  return ImageUpload;
 }
