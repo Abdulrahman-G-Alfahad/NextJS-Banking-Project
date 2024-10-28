@@ -1,4 +1,5 @@
 import Image from "next/image";
+import MoneyTransferForm from "./modal";
 
 function UserCard({ user }) {
   console.log(user);
@@ -15,7 +16,7 @@ function UserCard({ user }) {
     image = (
       <Image
         src={`/${user.image}`.trimEnd()}
-        alt={user.name}
+        alt={user.name || "User"}
         width={96}
         height={96}
         className="w-24 h-24 rounded-full mb-4"
@@ -26,8 +27,11 @@ function UserCard({ user }) {
     <div className="bg-gray-700 p-6 rounded-md flex flex-col items-center justify-center">
       {image}
       <div className="text-center">
-        <h3 className="text-lg text-white font-semibold mb-2">{user.name}</h3>
+        <h3 className="text-lg text-white font-semibold mb-2">
+          {user.username}
+        </h3>
         <p className="text-gray-300">{user.balance}</p>
+        <MoneyTransferForm user={user} />
       </div>
     </div>
   );
