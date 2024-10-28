@@ -3,7 +3,7 @@ import Input from "@/components/Input";
 
 function Login() {
   return (
-    <div className="bg-gray-900 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
+    <div className="bg-slate-100 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
       <div className="max-w-md w-full px-6 py-8 bg-gray-800 rounded-md shadow-md">
         <h2 className="text-3xl text-white font-semibold mb-6">Login</h2>
         {/* Wire up the login action */}

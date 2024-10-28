@@ -12,47 +12,59 @@ export async function login(formData) {
   const userData = Object.fromEntries(formData);
   console.log(userData);
 
-  const response = await fetch(`${baseUrl}/auth/login`, {
+  const response = await fetch(`${baseUrl}/mini-project/api/auth/login`, {
     method: "POST",
     headers: await getHeaders(),
     body: JSON.stringify(userData),
   });
 
-  // Extract and store the token
   const { token } = await response.json();
   await setToken(token);
 
-  // Redirect to the `/{TEMP}` page
   revalidatePath("/"); //<----------------
   redirect("/"); //<----------------
 }
 
 export async function register(formData) {
-  const response = await fetch(`${baseUrl}/auth/register`, {
+  const data = new FormData();
+  data.append("username", formData.username);
+  data.append("password", formData.password);
+  data.append("image", formData.image);
+  const response = await fetch(`${baseUrl}/mini-project/api/auth/register`, {
     method: "POST",
-    body: formData,
+    body: data,
   });
 
-  // Extract and store the token
   const { token } = await response.json();
+  console.log(token);
   await setToken(token);
 
   revalidatePath("/users");
 
-  // Redirect to the `/notes` page
   revalidatePath("/"); //<----------------
   redirect("/"); //<----------------
 }
 
 export async function logout() {
-  // What do you need to do to logout?
-  // Where should you redirect the user?
   await deleteToken();
   redirect("/");
 }
 
-export async function getAllUsers() {
-  const response = await fetch(`${baseUrl}/auth/users`);
+export async function getTransactions() {
+  const response = await fetch(`${baseUrl}/mini-project/api/transactions/my`, {
+    method: "GET",
+    headers: await getHeaders(),
+  });
   const users = response.json();
+  return users;
+}
+
+export async function getAllUsers() {
+  const response = await fetch(`${baseUrl}/mini-project/api/auth/users`, {
+    method: "GET",
+    headers: await getHeaders(),
+  });
+  const users = response.json();
+  console.log(users);
   return users;
 }

@@ -3,19 +3,18 @@ import Input from "@/components/Input";
 
 function Register() {
   return (
-    <div className="bg-gray-900 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
+    <div className="bg-slate-100 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
       <div className="max-w-md w-full px-6 py-8 bg-gray-800 rounded-md shadow-md">
         <h2 className="text-3xl text-white font-semibold mb-6">Register</h2>
-        {/* Wire up the register action */}
         <form action={register}>
           <div className="mb-4">
             <label
               htmlFor="name"
               className="block text-white text-sm font-medium mb-2"
             >
-              Name
+              User Name
             </label>
-            <Input type="text" name="name" required />
+            <Input type="username" name="username" required />
           </div>
           <div className="mb-4">
             <label

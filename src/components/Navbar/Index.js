@@ -20,9 +20,10 @@ async function Navbar() {
           <div className="block">
             <div className="ml-10 flex items-baseline space-x-4">
               <NavLink href="/">Home</NavLink>
-              <NavLink href="/notes">Notes</NavLink>
+              <NavLink href="/transactions">Transactions</NavLink>
               {/* <-------- TO BE FIXEDS */}
               <NavLink href="/users">Users</NavLink>
+              <NavLink href="/profile">Profile</NavLink>
               <AuthButtons />
             </div>
           </div>
