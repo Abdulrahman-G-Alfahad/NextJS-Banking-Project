@@ -13,7 +13,7 @@ function MoneyTransferForm({ user }) {
           >
             Amount
           </label>
-          <Input name="amount" type="amount" required />
+          <Input name="amount" type="amount" placeholder="Amount" required />
           <Input type="hidden" name="username" value={user} />
         </div>
         <div className="flex justify-center">
