@@ -32,7 +32,7 @@ export async function register(formData) {
   });
 
   const { token } = await response.json();
-  console.log(token);
+  //console.log(token);
   await setToken(token);
 
   revalidatePath("/users");
@@ -63,4 +63,18 @@ export async function getAllUsers() {
   const users = response.json();
   //console.log(users);
   return users;
+}
+
+export async function getUser() {
+  const response = await fetch(`${baseUrl}/mini-project/api/auth/me`, {
+    method: "GET",
+    headers: await getHeaders(),
+  });
+  const user = response.json();
+  //console.log(users);
+  return user;
+}
+
+export async function transfer(formData) {
+  console.log(formData);
 }

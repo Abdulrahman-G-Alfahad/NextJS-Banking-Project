@@ -5,14 +5,14 @@ import { jwtDecode } from "jwt-decode";
 
 export async function setToken(token) {
   const cookieStore = await cookies();
-  console.log(token);
+  //console.log(token);
   cookieStore.set("token", token);
 }
 
 export async function getToken() {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log(token);
+  //console.log(token);
   return token;
 }
 

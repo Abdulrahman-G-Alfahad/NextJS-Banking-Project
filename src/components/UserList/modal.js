@@ -1,8 +1,8 @@
 import React from "react";
-import { transfer } from "./transfer";
+import { transfer } from "@/actions/auth";
 import Input from "../Input";
 
-function MoneyTransferForm(user) {
+function MoneyTransferForm({ user }) {
   return (
     <div>
       <form action={transfer}>
@@ -14,6 +14,7 @@ function MoneyTransferForm(user) {
             Amount
           </label>
           <Input name="amount" type="amount" required />
+          <Input type="hidden" name="username" value={user} />
         </div>
         <div className="flex justify-center">
           <button
