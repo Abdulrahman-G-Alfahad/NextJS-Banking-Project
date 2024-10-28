@@ -12,7 +12,7 @@ async function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/">
-              <span className="font-semibold text-xl text-white">Our Bank</span>
+              <span className="font-semibold text-xl text-white">NAS</span>
             </Link>
           </div>
           <div className="block">
