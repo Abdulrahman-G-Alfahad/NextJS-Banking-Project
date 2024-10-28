@@ -17,6 +17,7 @@ export async function login(formData) {
     headers: await getHeaders(),
     body: JSON.stringify(userData),
   });
+  console.log(response);
 
   const { token } = await response.json();
   await setToken(token);
@@ -61,6 +62,14 @@ export async function getAllUsers() {
     headers: await getHeaders(),
   });
   const users = response.json();
-  //console.log(users);
+  return users;
+}
+
+export async function getUser() {
+  const response = await fetch(`${baseUrl}/mini-project/api/auth/me`, {
+    method: "GET",
+    headers: await getHeaders(),
+  });
+  const users = response.json();
   return users;
 }
