@@ -67,7 +67,7 @@
 "use server";
 import { getUser } from "@/actions/auth";
 import { baseUrl } from "@/actions/config";
-import { ImageUpload } from "@/actions/auth";
+import ImageUpload from "@/components/ImageUpload/ImageUpload";
 
 async function ProfilePage() {
   const user = await getUser();

@@ -10,7 +10,7 @@ import { deleteToken, setToken } from "@/lib/token";
 
 export async function login(formData) {
   const userData = Object.fromEntries(formData);
-  console.log(userData);
+  //console.log(userData);
 
   const response = await fetch(`${baseUrl}/mini-project/api/auth/login`, {
     method: "POST",
@@ -32,7 +32,7 @@ export async function register(formData) {
   });
 
   const { token } = await response.json();
-  console.log(token);
+  //console.log(token);
   await setToken(token);
 
   revalidatePath("/users");
@@ -51,7 +51,7 @@ export async function getTransactions() {
     method: "GET",
     headers: await getHeaders(),
   });
-  const users = response.json();
+  const users = await response.json();
   return users;
 }
 
@@ -60,8 +60,8 @@ export async function getAllUsers() {
     method: "GET",
     headers: await getHeaders(),
   });
-  const users = response.json();
-  console.log(users);
+  const users = await response.json();
+  //console.log(users);
   return users;
 }
 
@@ -70,18 +70,19 @@ export async function getUser() {
     method: "GET",
     headers: await getHeaders(),
   });
-  const user = response.json();
-  console.log(user);
+  const user = await response.json();
+  //console.log(user);
   return user;
 }
 
-export async function ImageUpload(image) {
-  console.log(`------------------------------${image}`);
+export async function UploadImage(formData) {
+  console.log(formData);
   const response = await fetch(`${baseUrl}/mini-project/api/auth/profile`, {
     method: "PUT",
-    headers: await getHeaders(),
-    body: JSON.stringify(image),
+    headers: await getHeaders(false),
+    body: formData,
   });
-  const ImageUpload = response.json();
-  return ImageUpload;
+  const ImageUpload = await response.json();
+  revalidatePath("/profile");
+  redirect("/profile");
 }
