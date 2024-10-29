@@ -1,4 +1,4 @@
-// //"use client";
+//"use client";
 // //import { useState } from "react";
 
 // import Image from "next/image";
@@ -64,7 +64,7 @@
 // }
 
 // export default ProfilePage;
-"use server";
+ "use server";
 import { getUser } from "@/actions/auth";
 import { baseUrl } from "@/actions/config";
 import ImageUpload from "@/components/ImageUpload/ImageUpload";

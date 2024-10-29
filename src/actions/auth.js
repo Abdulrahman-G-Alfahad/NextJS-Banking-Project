@@ -178,3 +178,12 @@ export async function UploadImage(formData) {
   revalidatePath("/profile");
   redirect("/profile");
 }
+
+// export async function filteredTransactions(filterType, searchQuery) {
+//   const response = await fetch(`${baseUrl}/mini-project/api/transactions/my?filter=${filterType}&query=${searchQuery}`, {
+//     method: "GET",
+//     headers: await getHeaders(),
+//   });
+//   const transactions = await response.json();
+//   return transactions;
+// }

@@ -31,11 +31,11 @@ function loggedUser({ user }) {
       //alert(`Deposited ${amountValue} KWD. New balance: ${user.balance} KWD`);
     } else {
       if (amountValue > user.balance) {
-        alert("Insufficient balance for withdrawal.");
+        //alert("Insufficient balance for withdrawal.");
       } else {
         user.balance -= amountValue;
         Withdraw(amountValue);
-        alert(`Withdrew ${amountValue} KWD. New balance: ${user.balance} KWD`);
+        //alert(`Withdrew ${amountValue} KWD. New balance: ${user.balance} KWD`);
       }
     }
 

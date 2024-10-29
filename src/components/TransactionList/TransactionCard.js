@@ -1,10 +1,10 @@
-import { getUser } from "@/lib/token";
+//import { getUser } from "@/lib/token";
 
-async function TransactionCard({ transaction }) {
+function TransactionCard({ transaction, user }) {
   let amount = <span className="text-green-600">+ {transaction.amount}</span>;
   const date = transaction.createdAt.split("T")[0].trim();
   const type = transaction.type;
-  const user = await getUser();
+  //const user = await getUser();
 
   if (
     type === "withdraw" ||
