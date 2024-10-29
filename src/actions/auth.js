@@ -76,8 +76,8 @@ export async function getUser() {
   // } catch {
   //   return user;
   // }
-   // Check if the response is OK before parsing JSON
-   if (response.ok) {
+  // Check if the response is OK before parsing JSON
+  if (response.ok) {
     try {
       // Parse JSON only if the response is successful
       return await response.json();
@@ -95,5 +95,23 @@ export async function getUser() {
 }
 
 export async function transfer(formData) {
-  console.log(formData);
+  const data = Object.fromEntries(formData);
+  //   console.log(
+  //     `${baseUrl}//mini-project/api/transactions/transfer/${data.username}`
+  //   );
+  const username = data.username;
+  delete data.username;
+  const response = await fetch(
+    `${baseUrl}/mini-project/api/transactions/transfer/${username}`,
+    {
+      method: "PUT",
+      headers: await getHeaders(),
+      body: JSON.stringify(data),
+    }
+  );
+
+  console.log(response);
+
+  revalidatePath("/users");
+  revalidatePath("/transactions");
 }
