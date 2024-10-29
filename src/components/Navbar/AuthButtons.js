@@ -9,7 +9,6 @@ async function AuthButtons() {
     return (
       <button
         type="button"
-        // Actually make the logout button work!
         onClick={logout}
         className="ml-2 px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
       >
