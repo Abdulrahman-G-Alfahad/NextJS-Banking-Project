@@ -52,7 +52,7 @@ export async function getTransactions() {
     method: "GET",
     headers: await getHeaders(),
   });
-  const users = response.json();
+  const users = await response.json();
   return users;
 }
 
@@ -61,7 +61,8 @@ export async function getAllUsers() {
     method: "GET",
     headers: await getHeaders(),
   });
-  const users = response.json();
+  const users = await response.json();
+  //console.log(users);
   return users;
 }
 
