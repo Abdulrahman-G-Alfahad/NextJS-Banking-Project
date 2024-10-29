@@ -149,14 +149,17 @@ export async function Withdraw(amount) {
 export async function Deposit(amount) {
   // const data = Object.fromEntries(formData);
 
-  const username = data.username;
-  delete data.username;
+  // const username = data.username;
+  // delete data.username;
+
+  const data = { amount: amount };
   const response = await fetch(
-    `${baseUrl}/mini-project/api/transactions/transfer/${username}`,
+   // `${baseUrl}/mini-project/api/transactions/transfer/username`,
+   `${baseUrl}/mini-project/api/transactions/deposit`,
     {
       method: "PUT",
       headers: await getHeaders(),
-      body: JSON.stringify(amount),
+      body: JSON.stringify(data),
     }
   );
 
