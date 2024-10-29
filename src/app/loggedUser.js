@@ -19,7 +19,7 @@ function loggedUser({ user }) {
     e.preventDefault();
     const amountValue = parseFloat(amount);
 
-    if (isNaN(amountValue) || amountValue <= 0) {
+    if (!(amountValue) || amountValue <= 0) {
       alert("Please enter a valid amount.");
       return;
     }
