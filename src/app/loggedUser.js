@@ -1,6 +1,5 @@
 "use client";
 import { Withdraw } from "@/actions/auth";
-import { Deposit } from "@/actions/auth";
 import Input from "@/components/Input";
 import { useState } from "react";
 
@@ -29,8 +28,7 @@ function loggedUser({ user }) {
 
     if (isDeposit) {
       user.balance += amountValue;
-      Deposit(amountValue);
-      alert(`Deposited ${amountValue} KWD. New balance: ${user.balance} KWD`);
+      //alert(`Deposited ${amountValue} KWD. New balance: ${user.balance} KWD`);
     } else {
       if (amountValue > user.balance) {
         alert("Insufficient balance for withdrawal.");
