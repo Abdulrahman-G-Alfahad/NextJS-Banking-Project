@@ -129,13 +129,14 @@ export async function Withdraw(amount) {
 
   //const username = data.username;
   //delete data.username;
-  console.log(amount);
+  //console.log(amount);
+  const data = { amount: amount };
   const response = await fetch(
     `${baseUrl}/mini-project/api/transactions/withdraw`,
     {
       method: "PUT",
       headers: await getHeaders(),
-      body: JSON.stringify(amount),
+      body: JSON.stringify(data),
     }
   );
 
@@ -145,13 +146,14 @@ export async function Withdraw(amount) {
   revalidatePath("/transactions");
 }
 
-export async function Deposit(formData) {
-  const data = Object.fromEntries(formData);
+export async function Deposit(amount) {
+  // const data = Object.fromEntries(formData);
 
-  const username = data.username;
-  delete data.username;
+  // const username = data.username;
+  // delete data.username;
+  const data = { amount: amount };
   const response = await fetch(
-    `${baseUrl}/mini-project/api/transactions/transfer/${username}`,
+    `${baseUrl}/mini-project/api/transactions/deposit`,
     {
       method: "PUT",
       headers: await getHeaders(),
