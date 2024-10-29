@@ -116,3 +116,16 @@ export async function transfer(formData) {
   revalidatePath("/users");
   revalidatePath("/transactions");
 }
+
+export async function UploadImage(formData) {
+  const response = await fetch(`${baseUrl}/mini-project/api/auth/profile`, {
+    method: "put",
+    headers: await getHeaders(false),
+    body: formData,
+  });
+  const image = await response.json();
+  revalidatePath("/profile");
+  redirect("/profile");
+  //console.log(users);
+  //return users;
+}
