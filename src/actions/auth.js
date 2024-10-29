@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { baseUrl, getHeaders } from "./config";
 import { redirect } from "next/navigation";
 import { deleteToken, setToken } from "@/lib/token";
+import { SignupFormSchema } from "@/lib/definitions";
 
 export async function login(formData) {
   const userData = Object.fromEntries(formData);
@@ -23,6 +24,24 @@ export async function login(formData) {
 }
 
 export async function register(formData) {
+  const validatedFields = SignupFormSchema.safeParse({
+    username: formData.get("username"),
+    password: formData.get("password"),
+    image: formData.get("image"),
+  });
+
+  // If any form fields are invalid, return early
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { username, password, image } = validatedFields.data;
+  console.log(validatedFields);
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   const response = await fetch(`${baseUrl}/mini-project/api/auth/register`, {
     method: "POST",
     body: formData,
@@ -86,6 +105,47 @@ export async function getUser() {
 }
 
 export async function transfer(formData) {
+  const data = Object.fromEntries(formData);
+
+  const username = data.username;
+  delete data.username;
+  const response = await fetch(
+    `${baseUrl}/mini-project/api/transactions/transfer/${username}`,
+    {
+      method: "PUT",
+      headers: await getHeaders(),
+      body: JSON.stringify(data),
+    }
+  );
+
+  console.log(response);
+
+  revalidatePath("/users");
+  revalidatePath("/transactions");
+}
+
+export async function Withdraw(amount) {
+  //const data = Object.fromEntries(formData);
+
+  //const username = data.username;
+  //delete data.username;
+  console.log(amount);
+  const response = await fetch(
+    `${baseUrl}/mini-project/api/transactions/withdraw`,
+    {
+      method: "PUT",
+      headers: await getHeaders(),
+      body: JSON.stringify(amount),
+    }
+  );
+
+  console.log(response);
+
+  revalidatePath("/users");
+  revalidatePath("/transactions");
+}
+
+export async function Deposit(formData) {
   const data = Object.fromEntries(formData);
 
   const username = data.username;

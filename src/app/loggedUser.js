@@ -1,4 +1,5 @@
 "use client";
+import { Withdraw } from "@/actions/auth";
 import Input from "@/components/Input";
 import { useState } from "react";
 
@@ -33,6 +34,7 @@ function loggedUser({ user }) {
         //alert("Insufficient balance for withdrawal.");
       } else {
         user.balance -= amountValue;
+        Withdraw(amountValue);
         //alert(`Withdrew ${amountValue} KWD. New balance: ${user.balance} KWD`);
       }
     }
