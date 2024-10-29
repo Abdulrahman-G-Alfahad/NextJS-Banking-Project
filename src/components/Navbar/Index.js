@@ -12,18 +12,17 @@ async function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/">
-              <span className="font-semibold text-xl text-white">
-                Our Notes
-              </span>
+              <span className="font-semibold text-xl text-white">NAS</span>
             </Link>
           </div>
           <div className="block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <NavLink href="/">Home</NavLink>
-              <NavLink href="/transactions">Transactions</NavLink>
-              {/* <-------- TO BE FIXEDS */}
-              <NavLink href="/users">Users</NavLink>
-              <NavLink href="/profile">Profile</NavLink>
+              <div className="justify-center">
+                <NavLink href="/">Home</NavLink>
+                <NavLink href="/transactions">Transactions</NavLink>
+                <NavLink href="/users">Users</NavLink>
+                <NavLink href="/profile">Profile</NavLink>
+              </div>
               <AuthButtons />
             </div>
           </div>

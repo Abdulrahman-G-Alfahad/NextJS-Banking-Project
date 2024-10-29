@@ -17,6 +17,7 @@ export async function login(formData) {
     headers: await getHeaders(),
     body: JSON.stringify(userData),
   });
+  console.log(response);
 
   const { token } = await response.json();
   await setToken(token);
@@ -70,19 +71,48 @@ export async function getUser() {
     method: "GET",
     headers: await getHeaders(),
   });
-  const user = await response.json();
-  //console.log(user);
-  return user;
+  let user;
+  // try {
+  //   user = response.json();
+  // } catch {
+  //   return user;
+  // }
+  // Check if the response is OK before parsing JSON
+  if (response.ok) {
+    try {
+      // Parse JSON only if the response is successful
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to parse JSON:", error);
+      return null; // Return null if JSON parsing fails
+    }
+  } else if (response.status === 401) {
+    console.log("User is not authorized");
+    return null; // Return null if unauthorized
+  } else {
+    console.error(`Request failed with status: ${response.status}`);
+    return null; // Return null for other errors
+  }
 }
 
-export async function UploadImage(formData) {
-  console.log(formData);
-  const response = await fetch(`${baseUrl}/mini-project/api/auth/profile`, {
-    method: "PUT",
-    headers: await getHeaders(false),
-    body: formData,
-  });
-  const ImageUpload = await response.json();
-  revalidatePath("/profile");
-  redirect("/profile");
+export async function transfer(formData) {
+  const data = Object.fromEntries(formData);
+  //   console.log(
+  //     `${baseUrl}//mini-project/api/transactions/transfer/${data.username}`
+  //   );
+  const username = data.username;
+  delete data.username;
+  const response = await fetch(
+    `${baseUrl}/mini-project/api/transactions/transfer/${username}`,
+    {
+      method: "PUT",
+      headers: await getHeaders(),
+      body: JSON.stringify(data),
+    }
+  );
+
+  console.log(response);
+
+  revalidatePath("/users");
+  revalidatePath("/transactions");
 }
