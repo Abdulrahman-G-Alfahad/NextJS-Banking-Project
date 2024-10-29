@@ -70,16 +70,28 @@ export async function getUser() {
     method: "GET",
     headers: await getHeaders(),
   });
-
   let user;
-
-  try {
-    user = await response.json();
-  } catch (error) {
-    console.error("Not Logged in");
+  // try {
+  //   user = response.json();
+  // } catch {
+  //   return user;
+  // }
+  // Check if the response is OK before parsing JSON
+  if (response.ok) {
+    try {
+      // Parse JSON only if the response is successful
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to parse JSON:", error);
+      return null; // Return null if JSON parsing fails
+    }
+  } else if (response.status === 401) {
+    console.log("User is not authorized");
+    return null; // Return null if unauthorized
+  } else {
+    console.error(`Request failed with status: ${response.status}`);
+    return null; // Return null for other errors
   }
-
-  return user;
 }
 
 export async function transfer(formData) {
