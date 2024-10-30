@@ -1,11 +1,11 @@
 //import { filteredTransactions } from "@/actions/auth";
 import { getTransactions } from "@/actions/auth";
 import FilterTransactions from "@/components/FilterTransactions";
-import { getUser } from "@/lib/token";
+import { getIdUser } from "@/lib/token";
 
 async function Transaction() {
   const transactions = await getTransactions();
-  const user = await getUser();
+  const user = await getIdUser();
 
   return <FilterTransactions transactions={transactions} user={user} />;
 }

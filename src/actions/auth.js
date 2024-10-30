@@ -125,11 +125,6 @@ export async function transfer(formData) {
 }
 
 export async function Withdraw(amount) {
-  //const data = Object.fromEntries(formData);
-
-  //const username = data.username;
-  //delete data.username;
-  //console.log(amount);
   const data = { amount: amount };
   const response = await fetch(
     `${baseUrl}/mini-project/api/transactions/withdraw`,
@@ -140,30 +135,20 @@ export async function Withdraw(amount) {
     }
   );
 
-  console.log(response);
-
   revalidatePath("/users");
   revalidatePath("/transactions");
 }
 
 export async function Deposit(amount) {
-  // const data = Object.fromEntries(formData);
-
-  // const username = data.username;
-  // delete data.username;
-
   const data = { amount: amount };
   const response = await fetch(
-   // `${baseUrl}/mini-project/api/transactions/transfer/username`,
-   `${baseUrl}/mini-project/api/transactions/deposit`,
+    `${baseUrl}/mini-project/api/transactions/deposit`,
     {
       method: "PUT",
       headers: await getHeaders(),
       body: JSON.stringify(data),
     }
   );
-
-  console.log(response);
 
   revalidatePath("/users");
   revalidatePath("/transactions");
@@ -181,12 +166,3 @@ export async function UploadImage(formData) {
   revalidatePath("/profile");
   redirect("/profile");
 }
-
-// export async function filteredTransactions(filterType, searchQuery) {
-//   const response = await fetch(`${baseUrl}/mini-project/api/transactions/my?filter=${filterType}&query=${searchQuery}`, {
-//     method: "GET",
-//     headers: await getHeaders(),
-//   });
-//   const transactions = await response.json();
-//   return transactions;
-// }
