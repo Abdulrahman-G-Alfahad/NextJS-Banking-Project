@@ -1,19 +1,8 @@
 "use client";
 import { UploadImage } from "@/actions/auth";
 import Input from "@/components/Input";
-//import { useState } from "react";
-function ImageUpload({ initialImage }) {
-  //const [profilePicture, setProfilePicture] = useState(initialImage);
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => setProfilePicture(reader.result);
-  //     reader.readAsDataURL(file);
-  //     setProfilePicture(file);
-  //   }
-  // };
 
+function ImageUpload({ initialImage }) {
   return (
     <div className="flex flex-col items-center">
       <div className="mt-4 mb-5">
