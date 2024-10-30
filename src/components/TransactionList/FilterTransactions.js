@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import TransactionList from "@/components/TransactionList/index";
 import Dropdown from "@/app/filtering/Dropdown";
+<<<<<<< HEAD:src/components/FilterTransactions.js
 //import moment from "moment/moment";
+=======
+import TransactionCard from "./TransactionCard";
+>>>>>>> main:src/components/TransactionList/FilterTransactions.js
 
 function FilterTransactions({ transactions, user }) {
   const [filterType, setFilterType] = useState("");
@@ -58,11 +61,16 @@ function FilterTransactions({ transactions, user }) {
     return filtered;
   };
 
+<<<<<<< HEAD:src/components/FilterTransactions.js
   let filteredTransactions = filterTransactions();
+=======
+  const filteredTransactionsList = filterTransactions();
+>>>>>>> main:src/components/TransactionList/FilterTransactions.js
 
   return (
-    <div className="flex flex-col items-center justify-center pt-15">
+    <div className="flex flex-col items-center justify-center pt-15 min-h-screen">
       <Dropdown onChange={handleFilterChange} />
+<<<<<<< HEAD:src/components/FilterTransactions.js
       {/* 
       {filterType === "by Date" && (
         <div className="mt-4 flex space-x-4">
@@ -89,6 +97,24 @@ function FilterTransactions({ transactions, user }) {
             Transactions
           </h2>
           <TransactionList transactions={filteredTransactions} user={user} />
+=======
+      <div className="w-full max-w-[90%] px-6 py-8 flex flex-col items-center">
+        <h2 className="text-center text-3xl text-black font-semibold mb-6">
+          Transactions
+        </h2>
+        <div className="flex flex-col flex-grow w-full overflow-auto border border-gray-200 rounded-lg p-4">
+          {filteredTransactionsList.length > 0 ? (
+            filteredTransactionsList.map((transaction, index) => (
+              <TransactionCard
+                key={`${transaction._id}-${index}`}
+                transaction={transaction}
+                user={user}
+              />
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No transactions found</p>
+          )}
+>>>>>>> main:src/components/TransactionList/FilterTransactions.js
         </div>
       </div>
     </div>

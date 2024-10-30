@@ -1,13 +1,39 @@
-//import { filteredTransactions } from "@/actions/auth";
+"use client";
+import { useState, useEffect } from "react";
 import { getTransactions } from "@/actions/auth";
-import FilterTransactions from "@/components/FilterTransactions";
-import { getUser } from "@/lib/token";
+import FilterTransactions from "@/components/TransactionList/FilterTransactions";
+import { getIdUser } from "@/lib/token";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
-async function Transaction() {
-  const transactions = await getTransactions();
-  const user = await getUser();
+function Transaction() {
+  const [transactions, setTransactions] = useState(null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  return <FilterTransactions transactions={transactions} user={user} />;
+  useEffect(() => {
+    async function fetchData() {
+      const fetchedTransactions = await getTransactions();
+      const fetchedUser = await getIdUser();
+      setTransactions(fetchedTransactions);
+      setUser(fetchedUser);
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center mt-10">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col flex-grow">
+      <FilterTransactions transactions={transactions} user={user} />
+    </div>
+  );
 }
 
 export default Transaction;

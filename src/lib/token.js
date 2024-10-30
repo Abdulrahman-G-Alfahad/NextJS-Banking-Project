@@ -1,19 +1,17 @@
 //import "server-only";
-"use server"; 
+"use server";
 
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
 
 export async function setToken(token) {
   const cookieStore = await cookies();
-  //console.log(token);
   cookieStore.set("token", token);
 }
 
 export async function getToken() {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
-  //console.log(token);
   return token;
 }
 
@@ -22,7 +20,7 @@ export async function deleteToken() {
   cookieStore.delete("token");
 }
 
-export async function getUser() {
+export async function getIdUser() {
   const token = await getToken();
   if (!token) return null;
 

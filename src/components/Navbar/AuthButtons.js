@@ -1,9 +1,18 @@
-import { getUser } from "@/lib/token";
+import { useState, useEffect } from "react";
+import { getIdUser } from "@/lib/token";
 import NavLink from "./NavLink.js";
 import { logout } from "@/actions/auth";
 
-async function AuthButtons() {
-  const user = await getUser();
+function AuthButtons() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const fetchedUser = await getIdUser();
+      setUser(fetchedUser);
+    }
+    fetchUser();
+  }, []);
 
   if (user)
     return (
