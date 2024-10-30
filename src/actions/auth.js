@@ -5,41 +5,56 @@ import { revalidatePath } from "next/cache";
 import { baseUrl, getHeaders } from "./config";
 import { redirect } from "next/navigation";
 import { deleteToken, setToken } from "@/lib/token";
-
-// TO BE FIXED <-----------------------------------------
+import { SignupFormSchema } from "@/lib/definitions";
 
 export async function login(formData) {
   const userData = Object.fromEntries(formData);
-  //console.log(userData);
 
   const response = await fetch(`${baseUrl}/mini-project/api/auth/login`, {
     method: "POST",
     headers: await getHeaders(),
     body: JSON.stringify(userData),
   });
-  console.log(response);
 
   const { token } = await response.json();
   await setToken(token);
 
-  revalidatePath("/"); //<----------------
-  redirect("/"); //<----------------
+  revalidatePath("/");
+  redirect("/");
 }
 
 export async function register(formData) {
+  const validatedFields = SignupFormSchema.safeParse({
+    username: formData.get("username"),
+    password: formData.get("password"),
+    image: formData.get("image"),
+  });
+
+  // If any form fields are invalid, return early
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { username, password, image } = validatedFields.data;
+  console.log(validatedFields);
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   const response = await fetch(`${baseUrl}/mini-project/api/auth/register`, {
     method: "POST",
     body: formData,
   });
 
   const { token } = await response.json();
-  //console.log(token);
+
   await setToken(token);
 
   revalidatePath("/users");
 
-  revalidatePath("/"); //<----------------
-  redirect("/"); //<----------------
+  revalidatePath("/");
+  redirect("/");
 }
 
 export async function logout() {
@@ -62,7 +77,7 @@ export async function getAllUsers() {
     headers: await getHeaders(),
   });
   const users = await response.json();
-  //console.log(users);
+
   return users;
 }
 
@@ -72,34 +87,26 @@ export async function getUser() {
     headers: await getHeaders(),
   });
   let user;
-  // try {
-  //   user = response.json();
-  // } catch {
-  //   return user;
-  // }
-  // Check if the response is OK before parsing JSON
+
   if (response.ok) {
     try {
-      // Parse JSON only if the response is successful
       return await response.json();
     } catch (error) {
       console.error("Failed to parse JSON:", error);
-      return null; // Return null if JSON parsing fails
+      return null;
     }
   } else if (response.status === 401) {
     console.log("User is not authorized");
-    return null; // Return null if unauthorized
+    return null;
   } else {
     console.error(`Request failed with status: ${response.status}`);
-    return null; // Return null for other errors
+    return null;
   }
 }
 
 export async function transfer(formData) {
   const data = Object.fromEntries(formData);
-  //   console.log(
-  //     `${baseUrl}//mini-project/api/transactions/transfer/${data.username}`
-  //   );
+
   const username = data.username;
   delete data.username;
   const response = await fetch(
@@ -116,3 +123,70 @@ export async function transfer(formData) {
   revalidatePath("/users");
   revalidatePath("/transactions");
 }
+
+export async function Withdraw(amount) {
+  //const data = Object.fromEntries(formData);
+
+  //const username = data.username;
+  //delete data.username;
+  //console.log(amount);
+  const data = { amount: amount };
+  const response = await fetch(
+    `${baseUrl}/mini-project/api/transactions/withdraw`,
+    {
+      method: "PUT",
+      headers: await getHeaders(),
+      body: JSON.stringify(data),
+    }
+  );
+
+  console.log(response);
+
+  revalidatePath("/users");
+  revalidatePath("/transactions");
+}
+
+export async function Deposit(amount) {
+  // const data = Object.fromEntries(formData);
+
+  // const username = data.username;
+  // delete data.username;
+
+  const data = { amount: amount };
+  const response = await fetch(
+   // `${baseUrl}/mini-project/api/transactions/transfer/username`,
+   `${baseUrl}/mini-project/api/transactions/deposit`,
+    {
+      method: "PUT",
+      headers: await getHeaders(),
+      body: JSON.stringify(data),
+    }
+  );
+
+  console.log(response);
+
+  revalidatePath("/users");
+  revalidatePath("/transactions");
+}
+
+export async function UploadImage(formData) {
+  const response = await fetch(`${baseUrl}/mini-project/api/auth/profile`, {
+    method: "put",
+    headers: await getHeaders(false),
+    body: formData,
+  });
+
+  const image = await response.json();
+
+  revalidatePath("/profile");
+  redirect("/profile");
+}
+
+// export async function filteredTransactions(filterType, searchQuery) {
+//   const response = await fetch(`${baseUrl}/mini-project/api/transactions/my?filter=${filterType}&query=${searchQuery}`, {
+//     method: "GET",
+//     headers: await getHeaders(),
+//   });
+//   const transactions = await response.json();
+//   return transactions;
+// }

@@ -3,24 +3,24 @@ import Input from "@/components/Input";
 
 function Login() {
   return (
-    <div className="bg-slate-100 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
-      <div className="max-w-md w-full px-6 py-8 bg-gray-800 rounded-md shadow-md">
-        <h2 className="text-3xl text-white font-semibold mb-6">Login</h2>
+    <div className="bg-gradient-to-r from-teal-400 to-blue-500 min-h-screen flex items-center justify-center">
+      <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-lg">
+        <h2 className="text-3xl text-gray-800 font-semibold mb-6">Login</h2>
         {/* Wire up the login action */}
         <form action={login}>
           <div className="mb-4">
             <label
-              htmlFor="email"
-              className="block text-white text-sm font-medium mb-2"
+              htmlFor="username"
+              className="block text-gray-700 text-sm font-medium mb-2"
             >
               Username
             </label>
-            <Input type="username" name="username" required />
+            <Input type="text" name="username" required />
           </div>
           <div className="mb-6">
             <label
               htmlFor="password"
-              className="block text-white text-sm font-medium mb-2"
+              className="block text-gray-700 text-sm font-medium mb-2"
             >
               Password
             </label>
@@ -29,7 +29,7 @@ function Login() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+              className="w-full px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors"
             >
               Login
             </button>

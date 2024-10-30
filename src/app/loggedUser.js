@@ -1,4 +1,6 @@
 "use client";
+import { Withdraw } from "@/actions/auth";
+import { Deposit } from "@/actions/auth";
 import Input from "@/components/Input";
 import { useState } from "react";
 
@@ -18,7 +20,7 @@ function loggedUser({ user }) {
     e.preventDefault();
     const amountValue = parseFloat(amount);
 
-    if (isNaN(amountValue) || amountValue <= 0) {
+    if (!amountValue || amountValue <= 0) {
       alert("Please enter a valid amount.");
       return;
     }
@@ -27,12 +29,14 @@ function loggedUser({ user }) {
 
     if (isDeposit) {
       user.balance += amountValue;
-      //alert(`Deposited ${amountValue} KWD. New balance: ${user.balance} KWD`);
+      Deposit(amountValue);
+      alert(`Deposited ${amountValue} KWD. New balance: ${user.balance} KWD`);
     } else {
       if (amountValue > user.balance) {
         //alert("Insufficient balance for withdrawal.");
       } else {
         user.balance -= amountValue;
+        Withdraw(amountValue);
         //alert(`Withdrew ${amountValue} KWD. New balance: ${user.balance} KWD`);
       }
     }

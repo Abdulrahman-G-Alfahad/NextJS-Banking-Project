@@ -1,30 +1,37 @@
 import Link from "next/link";
-
 import AuthButtons from "./AuthButtons";
 import NavLink from "./NavLink";
 
-// TO BE FIXED
-
 async function Navbar() {
   return (
-    <nav className="bg-gray-800">
+    <nav className="bg-gradient-to-r from-gray-50 to-gray-200 shadow-lg py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/">
-              <span className="font-semibold text-xl text-white">NAS</span>
+              <span className="font-bold text-2xl text-indigo-600">NAS</span>
             </Link>
           </div>
-          <div className="block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              <div className="justify-center">
-                <NavLink href="/">Home</NavLink>
-                <NavLink href="/transactions">Transactions</NavLink>
-                <NavLink href="/users">Users</NavLink>
-                <NavLink href="/profile">Profile</NavLink>
-              </div>
-              <AuthButtons />
+
+          <div className="flex-1 flex justify-center">
+            <div className="flex space-x-6">
+              <NavLink href="/" className="rounded-lg px-4 py-2">
+                Home
+              </NavLink>
+              <NavLink href="/transactions" className="rounded-lg px-4 py-2">
+                Transactions
+              </NavLink>
+              <NavLink href="/users" className="rounded-lg px-4 py-2">
+                Users
+              </NavLink>
+              <NavLink href="/profile" className="rounded-lg px-4 py-2">
+                Profile
+              </NavLink>
             </div>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <AuthButtons />
           </div>
         </div>
       </div>
