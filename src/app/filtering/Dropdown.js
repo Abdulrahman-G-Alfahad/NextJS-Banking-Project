@@ -17,7 +17,7 @@ function Dropdown({ onChange }) {
     { name: "Deposit", value: "deposit" },
     { name: "Withdraw", value: "withdraw" },
     { name: "Transfer", value: "transfer" },
-    { name: "By Date", value: "bydate" },
+    { name: "By Date", value: "by Date" },
   ];
   const filteredItems = items.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())

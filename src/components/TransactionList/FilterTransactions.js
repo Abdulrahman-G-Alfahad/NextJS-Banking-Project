@@ -270,42 +270,40 @@
 ///////////////////////////////////////////////
 
 //"use client";
-
 import { useState } from "react";
 import Dropdown from "@/app/filtering/Dropdown";
-//import moment from "moment";
-import moment from "moment/moment";
-import { DatePickerWithRange } from "@/components/DatePickerWithRange";
+import moment from "moment";
+import TransactionCard from "@/components/TransactionList/TransactionCard";
+import * as React from "react";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import { Button } from "@/components/ui/button"; // Adjust import if necessary
+import { Calendar } from "@/components/ui/calendar"; // Adjust import if necessary
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"; // Adjust import if necessary
+import { format } from "date-fns";
 
 function FilterTransactions({ transactions, user }) {
   const [filterType, setFilterType] = useState("");
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
 
-  // This handle is for the other filtering (deposit/withdraw/transfer)
-  const handleFilterChange = (selectedFilter) => {
-    setFilterType(selectedFilter);
-  };
+  const handleFilterChange = (selectedFilter) => setFilterType(selectedFilter);
 
-  // The filtering function for transactions based on type and date range
   const filterTransactions = () => {
     let filtered = transactions;
 
-    // Filter by type (deposit, withdraw, transfer)
-    if (
-      filterType === "deposit" ||
-      filterType === "withdraw" ||
-      filterType === "transfer"
-    ) {
+    if (["deposit", "withdraw", "transfer"].includes(filterType)) {
       filtered = filtered.filter(
         (transaction) => transaction.type === filterType
       );
     }
 
-    // Filter by date range if "by Date" is selected and both dates are provided
     if (filterType === "by Date" && fromDate && toDate) {
       const startDate = moment(fromDate);
-      const endDate = moment(toDate).endOf("day"); // Include the whole end date
+      const endDate = moment(toDate).endOf("day");
 
       filtered = filtered.filter((transaction) => {
         const transactionDate = moment(transaction.createdAt);
@@ -316,7 +314,7 @@ function FilterTransactions({ transactions, user }) {
     return filtered;
   };
 
-  const filteredTransactions = filterTransactions(); // Ensure this variable is correctly defined
+  const filteredTransactionsList = filterTransactions();
 
   return (
     <div className="flex flex-col items-center justify-center pt-15">
@@ -325,10 +323,10 @@ function FilterTransactions({ transactions, user }) {
       {filterType === "by Date" && (
         <div className="mt-4 flex space-x-4">
           <DatePickerWithRange
-            date={{ from: fromDate, to: toDate }}
+            date={{ from: fromDate || null, to: toDate || null }}
             setDate={(range) => {
-              setFromDate(range.from);
-              setToDate(range.to);
+              setFromDate(range.from || null);
+              setToDate(range.to || null);
             }}
             placeholder="Pick a date"
           />
@@ -340,9 +338,60 @@ function FilterTransactions({ transactions, user }) {
           <h2 className="text-center text-3xl text-black font-semibold mb-6">
             Transactions
           </h2>
-          <TransactionList transactions={filteredTransactions} user={user} />
+          <div className="flex flex-col flex-grow w-full overflow-auto border border-gray-200 rounded-lg p-4">
+            {filteredTransactionsList.length > 0 ? (
+              filteredTransactionsList.map((transaction, index) => (
+                <TransactionCard
+                  key={`${transaction._id}-${index}`}
+                  transaction={transaction}
+                  user={user}
+                />
+              ))
+            ) : (
+              <p className="text-center text-gray-500">No transactions found</p>
+            )}
+          </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+// Inline DatePickerWithRange component
+function DatePickerWithRange({ date, setDate, placeholder = "Pick a date" }) {
+  return (
+    <div className="grid gap-2">
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            id="date"
+            variant="outline"
+            className={`w-[300px] justify-start text-left font-normal ${
+              !date.from && "text-muted-foreground"
+            }`}
+          >
+            <CalendarIcon className="mr-2" />
+            {date?.from
+              ? date.to
+                ? `${format(new Date(date.from), "LLL dd, y")} - ${format(
+                    new Date(date.to),
+                    "LLL dd, y"
+                  )}`
+                : format(new Date(date.from), "LLL dd, y")
+              : placeholder}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            initialFocus
+            mode="range"
+            defaultMonth={date?.from}
+            selected={date}
+            onSelect={setDate}
+            numberOfMonths={2}
+          />
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }
