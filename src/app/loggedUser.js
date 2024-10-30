@@ -1,14 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Deposit, Withdraw } from "@/actions/auth";
+import { Deposit, getTransactions, Withdraw } from "@/actions/auth";
 import DepositLink from "@/app/transfer/depositLink";
+import TransactionList from "@/components/TransactionList";
 
 export default function HomeScreen({ user }) {
   const router = useRouter();
   const [amount, setAmount] = useState("");
   const [isDeposit, setIsDeposit] = useState(true);
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    async function fetchTransactions() {
+      const allTransactions = await getTransactions();
+      setTransactions(allTransactions.slice(-5).reverse()); // Get last 5 transactions, reverse for recent first
+    }
+    fetchTransactions();
+  }, []);
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
@@ -43,13 +53,6 @@ export default function HomeScreen({ user }) {
 
     setAmount("");
   };
-
-  // Mock transaction history data
-  const transactions = [
-    { type: "Deposit", amount: 500, date: "2023-05-01" },
-    { type: "Withdraw", amount: 200, date: "2023-05-03" },
-    { type: "Deposit", amount: 1000, date: "2023-05-05" },
-  ];
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -116,12 +119,12 @@ export default function HomeScreen({ user }) {
         </div>
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-xl font-semibold mb-4">Recent Transactions</h2>
-          <div className="space-y-4">
+          <div className="space-y-4 max-h-64 overflow-y-auto">
             {transactions.map((transaction, index) => (
               <div key={index} className="flex items-center">
                 <div
-                  className={`mr-2 h-4 w-4 ${
-                    transaction.type === "Deposit"
+                  className={`mr-2 h-4 w-4 flex items-center justify-center ${
+                    transaction.type === "deposit"
                       ? "text-green-500"
                       : "text-red-500"
                   }`}
