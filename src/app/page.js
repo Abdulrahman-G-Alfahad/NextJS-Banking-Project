@@ -6,7 +6,6 @@ import { getIdUser } from "@/lib/token";
 export default async function Home() {
   const user = await getUser();
   const idUser = await getIdUser();
-  console.log(idUser);
 
   if (user) {
     return <LoggedUser user={user} idUser={idUser} />;

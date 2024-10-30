@@ -38,7 +38,6 @@ export async function register(formData) {
   }
 
   const { username, password, image } = validatedFields.data;
-  console.log(validatedFields);
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -117,8 +116,6 @@ export async function transfer(formData) {
       body: JSON.stringify(data),
     }
   );
-
-  console.log(response);
 
   revalidatePath("/users");
   revalidatePath("/transactions");

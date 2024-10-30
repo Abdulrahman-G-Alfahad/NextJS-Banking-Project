@@ -29,7 +29,7 @@ function Login() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="w-full px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors"
+              className="w-full px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition-colors"
             >
               Login
             </button>

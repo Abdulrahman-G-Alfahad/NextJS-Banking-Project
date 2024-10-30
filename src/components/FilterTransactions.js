@@ -43,8 +43,6 @@ function FilterTransactions({ transactions, user }) {
   // //   setFilterType(selectedFilter);
   // // };
 
-  console.log(filteredTransactions);
-
   return (
     <div className="flex flex-col items-center justify-center pt-15">
       <Dropdown onChange={handleFilterChange} />
