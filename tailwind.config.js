@@ -7,11 +7,37 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-<<<<<<< HEAD
+
   	extend: {
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+
+  			navy: {
+  				DEFAULT: '#2A3A4F'
+  			},
+  			champagne: {
+  				DEFAULT: '#F5E6CC'
+  			},
+  			dutch: {
+  				DEFAULT: '#EFE2BA'
+  			},
+  			platinum: {
+  				DEFAULT: '#EAEAEA'
+  			},
+  			goldenrod: {
+  				DEFAULT: '#DAA520'
+  			},
+  			lightgold: {
+  				DEFAULT: '#ebc054'
+  			},
+  			seasalt: {
+  				DEFAULT: '#F6F8F7'
+  			},
+  			raisinblack: {
+  				DEFAULT: '#221C1D'
+  			},
+
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -57,7 +83,7 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		}
   	}
-=======
+
     extend: {
       colors: {
         background: "var(--background)",
@@ -72,7 +98,7 @@ module.exports = {
         raisinblack: { DEFAULT: "#221C1D" },
       },
     },
->>>>>>> main
+
   },
   plugins: [require("tailwindcss-animate")],
 };
