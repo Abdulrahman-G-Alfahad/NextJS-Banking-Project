@@ -1,8 +1,13 @@
 "use client";
+import dynamic from "next/dynamic";
 import { transfer } from "@/actions/auth";
 import Input from "@/components/Input";
-import { getIdUser } from "@/lib/token";
+//import { getIdUser } from "@/lib/token";
 import { redirect, useSearchParams } from "next/navigation";
+
+const getIdUser = dynamic(() =>
+  import("@/lib/token").then((mod) => mod.getIdUser)
+);
 
 function page() {
   const searchParams = useSearchParams();
