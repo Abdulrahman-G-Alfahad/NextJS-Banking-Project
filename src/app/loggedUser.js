@@ -72,7 +72,7 @@ export default function HomeScreen({ user }) {
           </div>
           <p className="text-xs text-gray-500">Available Balance</p>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg shadow-md p-6 ">
           <h2 className="text-xl font-semibold mb-4">Transfer Funds</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex items-center justify-between">
@@ -134,7 +134,7 @@ export default function HomeScreen({ user }) {
                       : "text-red-500"
                   }`}
                 >
-                  {transaction.type === "Deposit" ? "↓" : "↑"}
+                  {transaction.type === "deposit" ? "↓" : "↑"}
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-gray-900">
