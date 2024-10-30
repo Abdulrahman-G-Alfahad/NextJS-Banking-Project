@@ -4,34 +4,31 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Deposit, getTransactions, Withdraw } from "@/actions/auth";
 import DepositLink from "@/app/transfer/depositLink";
-import TransactionList from "@/components/TransactionList";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function HomeScreen({ user }) {
   const router = useRouter();
   const [amount, setAmount] = useState("");
   const [isDeposit, setIsDeposit] = useState(true);
   const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     async function fetchTransactions() {
+      setLoading(true); // Start loading
       const allTransactions = await getTransactions();
-      setTransactions(allTransactions.slice(-5).reverse()); // Get last 5 transactions, reverse for recent first
+      setTransactions(allTransactions.slice(-5).reverse()); // Get last 5 transactions
+      setLoading(false); // End loading
     }
     fetchTransactions();
   }, []);
 
-  const handleAmountChange = (e) => {
-    setAmount(e.target.value);
-  };
-
-  const handleSwitchChange = () => {
-    setIsDeposit((prev) => !prev);
-  };
+  const handleAmountChange = (e) => setAmount(e.target.value);
+  const handleSwitchChange = () => setIsDeposit((prev) => !prev);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const amountValue = parseFloat(amount);
-
     if (!amountValue || amountValue <= 0) {
       alert("Please enter a valid amount.");
       return;
@@ -50,10 +47,19 @@ export default function HomeScreen({ user }) {
         alert(`Withdrew ${amountValue} KWD. New balance: ${user.balance} KWD`);
       }
     }
-
     setAmount("");
   };
 
+  // If loading, return loading spinner
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  // Main content after loading
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid gap-6 md:grid-cols-2">
@@ -105,8 +111,7 @@ export default function HomeScreen({ user }) {
                 value={amount}
                 onChange={handleAmountChange}
                 required
-                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
-                          focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
               />
             </div>
             <button

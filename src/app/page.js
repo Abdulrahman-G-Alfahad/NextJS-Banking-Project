@@ -19,7 +19,7 @@ export default async function Home() {
 
         {/* Main content or any additional components can go here */}
 
-        <footer className="flex flex-wrap gap-6 justify-center w-full max-w-3xl mt-10">
+        {/* <footer className="flex flex-wrap gap-6 justify-center w-full max-w-3xl mt-10">
           <a
             className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors"
             href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -65,7 +65,7 @@ export default async function Home() {
             />
             Go to nextjs.org →
           </a>
-        </footer>
+        </footer> */}
       </div>
     );
   }

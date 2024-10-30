@@ -7,7 +7,7 @@ function TransactionCard({ transaction, user }) {
   const date = new Date(transaction.createdAt).toLocaleDateString();
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200 w-full max-w-md mx-auto">
+    <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200 w-full max-w-md mx-auto overflow-auto">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <div

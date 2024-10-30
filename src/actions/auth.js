@@ -5,7 +5,6 @@ import { revalidatePath } from "next/cache";
 import { baseUrl, getHeaders } from "./config";
 import { redirect } from "next/navigation";
 import { deleteToken, setToken } from "@/lib/token";
-import { SignupFormSchema } from "@/lib/definitions";
 
 export async function login(formData) {
   const userData = Object.fromEntries(formData);
@@ -24,23 +23,6 @@ export async function login(formData) {
 }
 
 export async function register(formData) {
-  const validatedFields = SignupFormSchema.safeParse({
-    username: formData.get("username"),
-    password: formData.get("password"),
-    image: formData.get("image"),
-  });
-
-  // If any form fields are invalid, return early
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-    };
-  }
-
-  const { username, password, image } = validatedFields.data;
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
   const response = await fetch(`${baseUrl}/mini-project/api/auth/register`, {
     method: "POST",
     body: formData,
