@@ -12,9 +12,11 @@ export default async function Home() {
     return <LoggedUser user={user} idUser={idUser} />;
   } else {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-br from-blue-50 to-teal-50">
-        <h1 className="font-extrabold text-6xl text-gray-800 mb-2">NAS Bank</h1>
-        <h2 className="font-bold text-4xl text-gray-600 mb-10">تجربة</h2>
+      <div className="flex flex-col items-center justify-center min-h-screen p-8">
+        <h1 className="font-extrabold text-6xl text-raisinblack mb-2">
+          NAS Bank
+        </h1>
+        <h2 className="font-bold text-4xl text-raisinblack mb-10">تجربة</h2>
 
         {/* Main content or any additional components can go here */}
 

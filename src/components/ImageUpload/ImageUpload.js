@@ -2,9 +2,12 @@
 import { UploadImage } from "@/actions/auth";
 import Input from "@/components/Input";
 
-function ImageUpload({ initialImage }) {
+function ImageUpload({ initialImage, balance }) {
   return (
     <div className="flex flex-col items-center p-6 bg-white shadow-lg rounded-lg max-w-xs w-full">
+      <p className="text-xl font-semibold text-gray-600">
+        Balance: KWD {balance}
+      </p>
       <div className="mt-4 mb-5">
         {initialImage ? (
           <img
@@ -25,7 +28,7 @@ function ImageUpload({ initialImage }) {
         />
         <button
           type="submit"
-          className="mt-4 bg-blue-600 text-white rounded-md p-2 cursor-pointer w-full transition duration-300 hover:bg-blue-700"
+          className="mt-4 bg-goldenrod text-white rounded-md p-2 cursor-pointer w-full transition duration-300 hover:bg-lightgold"
         >
           save
         </button>

@@ -1,12 +1,10 @@
 "use client";
-import { useState } from "react";
-import Input from "@/components/Input";
 
-function DepositLink({ user }) {
+import { useState } from "react";
+
+export default function DepositLink({ user }) {
   const [amount, setAmount] = useState("");
   const [generatedLink, setGeneratedLink] = useState(null);
-
-  console.log(user);
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
@@ -24,33 +22,42 @@ function DepositLink({ user }) {
   };
 
   return (
-    <div className="rounded-lg shadow-lg p-8 bg-white text-center flex flex-col gap-4 items-center">
+    <div className="bg-white rounded-lg shadow-md p-6">
+      <h2 className="text-xl font-semibold mb-4 text-center">
+        Generate Transfer Link
+      </h2>
       <div className="flex flex-col items-center gap-4">
         <label
           htmlFor="amount"
-          className="block text-gray-600 text-sm font-medium"
+          className="block text-sm font-medium text-gray-700"
         >
           Enter Amount for Transfer Link
         </label>
-        <Input
+        <input
+          id="amount"
           name="amount"
+          type="number"
           placeholder="Amount"
           value={amount}
           onChange={handleAmountChange}
-          className="border border-gray-300 rounded-lg px-4 py-2 w-full"
+          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
+                    focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
           required
         />
         <button
           onClick={handleGenerateLink}
-          className="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition-colors w-full"
+          className="w-full px-4 py-2 text-sm font-medium text-white bg-sky-600 rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
         >
           Generate Link
         </button>
 
         {generatedLink && (
           <div className="mt-4 text-center">
-            <p className="text-gray-600">Share this link:</p>
-            <a href={generatedLink} className="text-indigo-500 break-all">
+            <p className="text-gray-600 mb-2">Share this link:</p>
+            <a
+              href={generatedLink}
+              className="text-sky-600 hover:text-sky-800 break-all"
+            >
               {generatedLink}
             </a>
           </div>
@@ -59,5 +66,3 @@ function DepositLink({ user }) {
     </div>
   );
 }
-
-export default DepositLink;
