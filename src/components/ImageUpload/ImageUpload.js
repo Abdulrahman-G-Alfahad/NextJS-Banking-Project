@@ -1,40 +1,34 @@
 "use client";
 import { UploadImage } from "@/actions/auth";
 import Input from "@/components/Input";
-//import { useState } from "react";
-function ImageUpload({ initialImage }) {
-  //const [profilePicture, setProfilePicture] = useState(initialImage);
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => setProfilePicture(reader.result);
-  //     reader.readAsDataURL(file);
-  //     setProfilePicture(file);
-  //   }
-  // };
 
+function ImageUpload({ initialImage }) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center p-6 bg-white shadow-lg rounded-lg max-w-xs w-full">
       <div className="mt-4 mb-5">
         {initialImage ? (
           <img
             src={initialImage}
             alt="Profile"
-            className="w-36 h-36 rounded-full"
+            className="w-36 h-36 rounded-full object-cover shadow-md"
           />
         ) : (
-          <div className="w-36 h-36 rounded-full bg-gray-300" />
+          <div className="w-36 h-36 rounded-full bg-gray-200 flex items-center justify-center shadow-md" />
         )}
       </div>
-      <form action={UploadImage}>
+      <form action={UploadImage} className="flex flex-col items-center w-full">
         <Input
           type="file"
           name="image"
-          className="mt-4 border border-gray-300 rounded p-2 cursor-pointer w-48"
+          className="mt-2 border border-gray-300 rounded-md p-2 cursor-pointer w-full text-gray-700 file:bg-blue-500 file:text-white file:rounded file:px-4 file:py-2"
           required
         />
-        <button type="submit">submit</button>
+        <button
+          type="submit"
+          className="mt-4 bg-blue-600 text-white rounded-md p-2 cursor-pointer w-full transition duration-300 hover:bg-blue-700"
+        >
+          save
+        </button>
       </form>
     </div>
   );
