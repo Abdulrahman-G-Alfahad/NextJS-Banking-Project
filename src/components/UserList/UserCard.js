@@ -8,7 +8,7 @@ function UserCard({ user }) {
     : "https://cdn.pixabay.com/photo/2024/04/28/05/16/animal-8724816_640.jpg";
 
   return (
-    <div className="bg-gray-700 p-6 rounded-md flex flex-col items-center justify-center">
+    <div className="bg-white p-6 rounded-md flex flex-col items-center justify-center shadow-md border border-gray-200">
       <Image
         src={imageUrl}
         alt={user.name || "User"}
@@ -17,10 +17,10 @@ function UserCard({ user }) {
         className="w-24 h-24 rounded-full mb-4"
       />
       <div className="text-center">
-        <h3 className="text-lg text-white font-semibold mb-2">
+        <h3 className="text-lg text-gray-800 font-semibold mb-2">
           {user.username}
         </h3>
-        <p className="text-gray-300">{`${user.balance} KD`}</p>
+        <p className="text-gray-600">{`${user.balance} KD`}</p>
 
         <input
           type="checkbox"
@@ -30,7 +30,7 @@ function UserCard({ user }) {
 
         <label
           htmlFor={`modal-toggle-${user._id}`}
-          className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md cursor-pointer"
+          className="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-md cursor-pointer hover:bg-indigo-600 transition-colors duration-200"
         >
           Transfer
         </label>

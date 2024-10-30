@@ -178,7 +178,7 @@ import Input from "@/components/Input";
 
 function Register() {
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center absolute inset-0">
+    <div className="bg-gradient-to-l from-teal-400 to-blue-500 min-h-screen flex items-center justify-center">
       <div className="max-w-md w-full px-6 py-8 bg-white rounded-xl shadow-lg border border-gray-200">
         <h2 className="text-3xl text-gray-800 font-semibold mb-6 text-center">
           Register

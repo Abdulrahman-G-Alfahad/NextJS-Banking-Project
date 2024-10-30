@@ -1,5 +1,5 @@
 //import "server-only";
-"use server"; 
+"use server";
 
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
@@ -22,7 +22,7 @@ export async function deleteToken() {
   cookieStore.delete("token");
 }
 
-export async function getUser() {
+export async function getIdUser() {
   const token = await getToken();
   if (!token) return null;
 

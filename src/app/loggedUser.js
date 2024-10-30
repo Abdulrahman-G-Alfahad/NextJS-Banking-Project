@@ -1,10 +1,12 @@
 "use client";
-import { Withdraw } from "@/actions/auth";
-import { Deposit } from "@/actions/auth";
-import Input from "@/components/Input";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Deposit, Withdraw } from "@/actions/auth";
+import Input from "@/components/Input";
+import DepositLink from "@/app/transfer/depositLink";
 
-function loggedUser({ user }) {
+function LoggedUser({ user }) {
+  const router = useRouter();
   const [amount, setAmount] = useState("");
   const [isDeposit, setIsDeposit] = useState(true);
 
@@ -25,39 +27,35 @@ function loggedUser({ user }) {
       return;
     }
 
-    //Should i change Alert to popup ?
-
     if (isDeposit) {
       user.balance += amountValue;
       Deposit(amountValue);
       alert(`Deposited ${amountValue} KWD. New balance: ${user.balance} KWD`);
     } else {
       if (amountValue > user.balance) {
-        //alert("Insufficient balance for withdrawal.");
+        alert("Insufficient balance for withdrawal.");
       } else {
         user.balance -= amountValue;
         Withdraw(amountValue);
-        //alert(`Withdrew ${amountValue} KWD. New balance: ${user.balance} KWD`);
+        alert(`Withdrew ${amountValue} KWD. New balance: ${user.balance} KWD`);
       }
     }
 
-    setAmount(""); // Reset amount field
+    setAmount("");
   };
 
   return (
     <div className="flex flex-col gap-10 items-center min-h-screen justify-center bg-gray-100">
-      {/* Balance Display div */}
+      {/* Balance Display */}
       <div className="rounded-lg shadow-lg p-8 bg-white text-center w-[350px] h-[150px] flex flex-col justify-center items-center">
         <h1 className="font-bold text-lg">Your Available Balance:</h1>
         <p className="text-2xl font-semibold text-gray-500">{`${user.balance} KWD`}</p>
       </div>
 
-      {/* Amount box/submit button div */}
+      {/* Amount Input Form */}
       <div className="rounded-lg shadow-lg p-8 bg-white text-center w-[350px] h-[250px] flex flex-col gap-4 items-center">
         <div className="flex items-center gap-4">
           <h1 className="font-semibold">Deposit</h1>
-
-          {/* The label is the switch */}
           <label className="relative inline-block w-12 h-6">
             <input
               type="checkbox"
@@ -68,7 +66,6 @@ function loggedUser({ user }) {
             <span className="absolute cursor-pointer inset-0 bg-gray-300 transition-colors duration-300 peer-checked:bg-gray-500 rounded-full"></span>
             <span className="absolute left-1 top-1 h-4 w-4 bg-white transition-transform duration-300 transform peer-checked:translate-x-6 rounded-full"></span>
           </label>
-
           <h1 className="font-semibold">Withdraw</h1>
         </div>
 
@@ -99,8 +96,9 @@ function loggedUser({ user }) {
           </button>
         </form>
       </div>
+      <DepositLink user={user} />
     </div>
   );
 }
 
-export default loggedUser;
+export default LoggedUser;

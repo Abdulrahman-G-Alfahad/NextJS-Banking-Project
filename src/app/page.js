@@ -1,12 +1,15 @@
 import { getUser } from "@/actions/auth";
 import Image from "next/image";
 import LoggedUser from "./loggedUser";
+import { getIdUser } from "@/lib/token";
 
 export default async function Home() {
   const user = await getUser();
+  const idUser = await getIdUser();
+  console.log(idUser);
 
   if (user) {
-    return <LoggedUser user={user} />;
+    return <LoggedUser user={user} idUser={idUser} />;
   } else {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-br from-blue-50 to-teal-50">

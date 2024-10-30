@@ -1,9 +1,9 @@
-import { getUser } from "@/lib/token";
+import { getIdUser } from "@/lib/token";
 import NavLink from "./NavLink.js";
 import { logout } from "@/actions/auth";
 
 async function AuthButtons() {
-  const user = await getUser();
+  const user = await getIdUser();
 
   if (user)
     return (
