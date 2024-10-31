@@ -2,6 +2,8 @@ import { getUser } from "@/actions/auth";
 import Image from "next/image";
 import LoggedUser from "./loggedUser";
 import { getIdUser } from "@/lib/token";
+import img from "@/images/banner.png";
+import background from "@/images/cityscape22.png";
 
 export default async function Home() {
   const user = await getUser();
@@ -11,11 +13,22 @@ export default async function Home() {
     return <LoggedUser user={user} idUser={idUser} />;
   } else {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-8">
-        <h1 className="font-extrabold text-6xl text-raisinblack mb-2">
-          NAS Bank
+      <div className="flex flex-col items-center justify-center p-8  ">
+        <h1 className="font-extrabold text-6xl text-raisinblack mt-5">
+          <Image src={img} alt="banner" width={600} />
         </h1>
-        <h2 className="font-bold text-4xl text-raisinblack mb-10">تجربة</h2>
+        <h2 className="font-bold text-4xl text-raisinblack mb-10">
+          Your <span className="text-goldenrod font-bold">People</span>.Your{" "}
+          <span className="text-goldenrod font-bold">Bank</span>.
+        </h2>
+
+        <div className="fixed bottom-9 left-0 w-screen h-[40vh] overflow-hidden">
+          <Image
+            src={background}
+            alt="cityscape"
+            className="object-cover w-full h-full"
+          />
+        </div>
 
         {/* Main content or any additional components can go here */}
 

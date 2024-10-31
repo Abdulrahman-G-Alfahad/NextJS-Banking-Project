@@ -46,7 +46,7 @@ export default function DepositLink({ user }) {
         />
         <button
           onClick={handleGenerateLink}
-          className="w-full px-4 py-2 text-sm font-medium text-white bg-sky-600 rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+          className="w-full px-4 py-2 text-sm font-medium text-white bg-navy rounded-md hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
         >
           Generate Link
         </button>

@@ -29,7 +29,7 @@ function UserCard({ user }) {
         />
         <label
           htmlFor={`modal-toggle-${user._id}`}
-          className="px-4 py-2 bg-sky-600 text-white rounded-md cursor-pointer hover:bg-sky-700 transition-colors duration-200"
+          className="px-4 py-2 bg-navy hover:bg-slate-600 text-white rounded-md cursor-pointer transition-colors duration-200"
         >
           Transfer
         </label>

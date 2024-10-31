@@ -35,7 +35,8 @@ function ProfilePage() {
   return (
     <div className="flex flex-col items-center p-8 mt-16 min-h-screen">
       <h1 className="text-4xl font-bold text-gray-800 mb-8">
-        Welcome {user.username}
+        Welcome{" "}
+        <span className="text-goldenrod font-bold"> {user.username} </span>
       </h1>
       <ImageUpload
         initialImage={`${baseUrl}/${user.image}`}

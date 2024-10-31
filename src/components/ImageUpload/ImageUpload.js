@@ -28,7 +28,7 @@ function ImageUpload({ initialImage, balance }) {
         />
         <button
           type="submit"
-          className="mt-4 bg-sky-600 text-white rounded-md p-2 cursor-pointer w-full transition duration-300 hover:bg-sky-700"
+          className="mt-4 bg-navy hover:bg-slate-600 text-white rounded-md p-2 cursor-pointer w-full transition duration-300 "
         >
           save
         </button>

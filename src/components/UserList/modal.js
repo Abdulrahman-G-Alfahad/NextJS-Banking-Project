@@ -19,7 +19,7 @@ function MoneyTransferForm({ user }) {
         <div className="flex justify-center">
           <button
             type="submit"
-            className="px-4 py-2 bg-green-700 text-white rounded-md hover:bg-green-500 transition-colors"
+            className="px-4 py-2  text-white rounded-md bg-navy hover:bg-slate-600 transition-colors"
           >
             Transfer
           </button>

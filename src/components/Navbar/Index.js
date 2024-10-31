@@ -3,6 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 import AuthButtons from "./AuthButtons";
 import NavLink from "./NavLink";
+import img from "@/images/Logo.png";
+import Image from "next/image";
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,7 +16,7 @@ function Navbar() {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/">
-              <span className="font-bold text-2xl text-goldenrod">NAS</span>
+              <Image src={img} alt="image" height={50} width={40} />
             </Link>
           </div>
 

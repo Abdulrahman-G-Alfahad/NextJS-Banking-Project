@@ -12,8 +12,8 @@ function NavLink({ children, href }) {
       href={href}
       className={`${
         isActive
-          ? "text-indigo-600 bg-indigo-100"
-          : "text-gray-700 hover:bg-indigo-100 hover:text-indigo-700"
+          ? "text-navy bg-slate-100"
+          : "text-gray-700 hover:bg-slate-200 hover:text-navy"
       } px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200`}
     >
       {children}
