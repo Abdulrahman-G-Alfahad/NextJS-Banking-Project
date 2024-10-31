@@ -19,7 +19,7 @@ function Dropdown({ onChange }) {
     { name: "Deposit", value: "deposit" },
     { name: "Withdraw", value: "withdraw" },
     { name: "Transfer", value: "transfer" },
-    { name: "By Date", value: "bydate" },
+    // { name: "By Date", value: "bydate" },
   ];
   const filteredItems = items.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -51,7 +51,7 @@ function Dropdown({ onChange }) {
             {filteredItems.map((item) => (
               <div
                 key={item.value}
-                onClick={() => handleSelect(item.value)} 
+                onClick={() => handleSelect(item.value)}
                 className="block p-3 text-black hover:bg-gray-200 cursor-pointer"
               >
                 {item.name}
@@ -61,7 +61,7 @@ function Dropdown({ onChange }) {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export default Dropdown;

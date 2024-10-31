@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { getUser } from "@/actions/auth";
 import { baseUrl } from "@/actions/config";
 import ImageUpload from "@/components/ImageUpload/ImageUpload";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -25,8 +26,8 @@ function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-lg text-gray-700">Loading...</p>
+      <div className="flex justify-center items-center mt-10">
+        <LoadingSpinner />
       </div>
     );
   }
